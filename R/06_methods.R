@@ -356,9 +356,9 @@ summary.bcnsm <- function(object, digits = 4L, ...) {
     se_gamma <- sqrt(diag(object$vcov)[object$optim_params$par_id$gamma])
     TAB_gamma <- round(cbind(
       Estimate = gamma,
-      `Std. Error` = se_gamma,
-      `z value` = gamma / se_gamma,
-      `Pr(>|z|)` = 2 * stats::pnorm(abs(gamma / se_gamma), lower.tail = FALSE)
+      `Std. Error` = se_gamma
+      #`z value` = gamma / se_gamma,
+      #`Pr(>|z|)` = 2 * stats::pnorm(abs(gamma / se_gamma), lower.tail = FALSE)
     ), digits)
 
 
@@ -374,7 +374,7 @@ summary.bcnsm <- function(object, digits = 4L, ...) {
         names_gamma[i] <- paste0("gamma", id[i, 1], id[i, 2])
       }
 
-      rownames(TAB_gamma)
+      rownames(TAB_gamma) <- names_gamma
 
     }
 

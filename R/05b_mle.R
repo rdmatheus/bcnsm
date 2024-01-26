@@ -151,6 +151,9 @@ bcnsm_fit <- function(y, association = unstructured(ncol(y)),
   if (is.vector(y))
     y <- matrix(y, ncol = length(y))
 
+  if (is.data.frame(y))
+    y <- as.matrix(y)
+
   n <- nrow(y)
   d <- ncol(y)
 
@@ -287,7 +290,7 @@ bcnsm_fit <- function(y, association = unstructured(ncol(y)),
     ## Parameter setting
     mu <- theta[par_id$mu]
     sigma <- theta[par_id$sigma]
-    lambda <- rep(0L, d)
+    lambda <- rep(NA, d)
     lambda[lambda_id] <- theta[par_id$lambda]
     nu <- rep(NA, d)
     nu[nu_id] <- theta[par_id$nu]

@@ -239,7 +239,7 @@ bcpe <- function(x) {
 
       z <- log(x / mu0) / sigma0
 
-      grid <- seq(1, 20, 1)
+      grid <- seq(2, 20, 1)
       upsilon <- function(nu){
         cdf <- sort(gamlss.dist::dPE(z, mu = 0, sigma = 1, nu = nu))
         temp <- stats::qqnorm(stats::qnorm(cdf), plot.it = FALSE)
@@ -474,7 +474,7 @@ lpe <- function(x) {
 
       z <- log(x / mu0) / sigma0
 
-      grid <- seq(1, 20, 1)
+      grid <- seq(2, 20, 1)
       upsilon <- function(nu){
         cdf <- sort(gamlss.dist::dPE(z, mu = 0, sigma = 1, nu = nu))
         temp <- stats::qqnorm(stats::qnorm(cdf), plot.it = FALSE)
