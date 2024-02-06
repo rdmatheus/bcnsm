@@ -47,8 +47,6 @@
 #'      101, 321--344.
 #'
 #' @examples
-#' \dontrun{
-#'
 #' ### Sample size and dimension
 #' n <- 1000
 #' d <- 4
@@ -76,7 +74,6 @@
 #' y <- rbcnsm(n, mu, sigma, lambda, nu, Gamma, copula, delta, margins)
 #'
 #' mvplot(y)  ## See ?mvplot for documentation
-#' }
 #'
 #' @author Rodrigo M. R. Medeiros <\email{rodrigo.matheus@live.com}>
 #'
