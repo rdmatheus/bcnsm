@@ -57,15 +57,13 @@
 #' \dontrun{
 #' ## Random sampling
 #'
-#' # Seed for reproducibility
-#' set.seed(123)
-#'
 #' ### Sample size and dimension
 #' n <- 200
 #' d <- 4
 #'
 #' ### Association matrix
-#' Gamma <- uniform(d)$Gamma(0.8)
+#' Gamma <- matrix(0.8, d, d)
+#' diag(Gamma) <- 1
 #'
 #' ### Marginal specifications
 #'
@@ -81,6 +79,7 @@
 #' delta <- 4
 #'
 #' ### Observations
+#' set.seed(123) # Seed for reproducibility
 #' y <- rbcnsm(n, mu, sigma, lambda, nu, Gamma, copula, delta, margins)
 #' colnames(y) <- c("y1", "y2", "y3", "y4")
 #'
@@ -88,7 +87,7 @@
 #' mvplot(y)
 #'
 #' ## Fit with Gaussian copula and uniform structure
-#' fit <- bcnsm_fit(y, association = uniform(d), copula = "gaussian",
+#' fit <- bcnsm_fit(y, association = "uniform", copula = "gaussian",
 #'                  margins = c("bcno", "lt", "bct", "lno"))
 #'
 #' class(fit)
@@ -308,7 +307,7 @@ bcnsm_fit <- function(y, association = c("unstructured", "uniform", "nonassociat
     }
 
     ## Out
-    if (any(!is.finite(mu)) | any(!is.finite(sigma)) | any(!is.finite(lambda)) |
+    if (any(!is.finite(mu)) | any(!is.finite(sigma)) | any(!is.finite(lambda[lambda_id])) |
         any(mu < 0) | any(sigma < 0) | any(nu[nu_id] < 0) | gamma_id | is.null(dec)) {
 
       -Inf
