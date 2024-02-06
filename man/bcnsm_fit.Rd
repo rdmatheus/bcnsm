@@ -6,7 +6,7 @@
 \usage{
 bcnsm_fit(
   y,
-  association = unstructured(ncol(y)),
+  association = c("unstructured", "uniform", "nonassociative"),
   copula = c("gaussian", "t", "slash", "hyp"),
   delta = NULL,
   margins = "bcno",
@@ -17,10 +17,8 @@ bcnsm_fit(
 \arguments{
 \item{y}{a matrix with the sample observations.}
 
-\item{association}{an object of class \code{"\link{association}"}, which is a function
-\code{function(d)}, where \code{d} is the number of cols of \code{y} (data dimension).
-Functions \code{\link{nonassociative}}, \code{\link{unstructured}} (default), and
-\code{\link{uniform}} can be used.}
+\item{association}{one of \code{"unstructured"} (default), \code{"uniform"}, or
+\code{"nonassociative"}, which specify the association matrix of the model.}
 
 \item{copula}{character; informs which normal scale mixture distribution should be used to generate
 the NSM copula. Currently, the copulas available are: Gaussian (\code{"gaussian"}),

@@ -4,10 +4,8 @@
 #' likelihood.
 #'
 #' @param y a matrix with the sample observations.
-#' @param association an object of class \code{"\link{association}"}, which is a function
-#'     \code{function(d)}, where \code{d} is the number of cols of \code{y} (data dimension).
-#'     Functions \code{\link{nonassociative}}, \code{\link{unstructured}} (default), and
-#'     \code{\link{uniform}} can be used.
+#' @param association one of \code{"unstructured"} (default), \code{"uniform"}, or
+#'     \code{"nonassociative"}, which specify the association matrix of the model.
 #' @param copula character; informs which normal scale mixture distribution should be used to generate
 #'     the NSM copula. Currently, the copulas available are: Gaussian (\code{"gaussian"}),
 #'     Student's \emph{t} (\code{"t"}), slash (\code{"slash"}), and hyperbolic (\code{"hyp"}).
@@ -121,7 +119,7 @@
 #' plot(final_fit)
 #' plot(final_fit, type = "margins")
 #' }
-bcnsm_fit <- function(y, association = unstructured(ncol(y)),
+bcnsm_fit <- function(y, association = c("unstructured", "uniform", "nonassociative"),
                       copula = c("gaussian", "t", "slash", "hyp"),
                       delta = NULL, margins = "bcno",
                       control = control_fit(...), ...) {
@@ -156,6 +154,10 @@ bcnsm_fit <- function(y, association = unstructured(ncol(y)),
 
   n <- nrow(y)
   d <- ncol(y)
+
+  ### Association matrix
+  association <- match.arg(association, c("unstructured", "uniform", "nonassociative"))
+  association <- get(association)(d)
 
   ## Margins
   margins <- as.vector(matrix(margins, 1, d))
